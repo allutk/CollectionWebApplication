@@ -1,0 +1,348 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.ttu.ee/idu0075/155409IAPB/ws/collection" targetNamespace="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">
+	<wsdl:types>
+		<xs:schema targetNamespace="http://www.ttu.ee/idu0075/155409IAPB/ws/collection" elementFormDefault="qualified">
+		
+			<xs:complexType name="cardType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:integer"/>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="condition" type="tns:conditionType"/>
+					<xs:element name="lang" type="tns:langType"/>
+					<xs:element name="artist" type="xs:string"/>
+					<xs:element name="year" type="xs:integer"/>
+				</xs:sequence>
+			</xs:complexType>
+			
+			<xs:simpleType name="conditionType">
+				<xs:restriction base="xs:string">
+					<xs:pattern value="mint|near mint|played|heavily played"/>
+				</xs:restriction>
+			</xs:simpleType>
+			
+			<xs:simpleType name="langType">
+				<xs:restriction base="xs:string">
+					<xs:pattern value="en|fr|de|it|ja|ko|pt|ru|es|zh"/>
+				</xs:restriction>
+			</xs:simpleType>
+			
+			<xs:complexType name="collectionType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:integer"/>
+					<xs:element name="collectionNo" type="xs:string"/>
+					<xs:element name="collectorName" type="xs:string"/>
+					<xs:element name="collectorCountry" type="xs:string"/>
+					<xs:element name="amount" type="xs:double"/>
+					<xs:element name="collectionCardList" type="tns:collectionCardListType"/>
+				</xs:sequence>
+			</xs:complexType>
+			
+			<xs:complexType name="collectionCardListType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="collectionCard" type="tns:collectionCardType"/>
+				</xs:sequence>
+			</xs:complexType>
+			
+			<xs:complexType name="collectionCardType">
+				<xs:sequence>
+					<xs:element name="card" type="tns:cardType"/>
+					<xs:element name="quantity" type="xs:double"/>
+					<xs:element name="unitPrice" type="xs:double"/>
+				</xs:sequence>
+			</xs:complexType>
+		
+			<xs:element name="getCardRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="cardId" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getCardResponse" type="tns:cardType"/>
+			
+			<xs:element name="addCardRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="name" type="xs:string"/>
+						<xs:element name="condition" type="tns:conditionType"/>
+						<xs:element name="lang" type="tns:langType"/>
+						<xs:element name="artist" type="xs:string"/>
+						<xs:element name="year" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="addCardResponse" type="tns:cardType"/>
+			
+			<xs:element name="getCardListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getCardListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="card" type="tns:cardType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="getCollectionRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="collectionId" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getCollectionResponse" type="tns:collectionType"/>
+			
+			<xs:element name="addCollectionRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="collectionNo" type="xs:string"/>
+						<xs:element name="collectorName" type="xs:string"/>
+						<xs:element name="collectorCountry" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="addCollectionResponse" type="tns:collectionType"/>
+			
+			<xs:element name="getCollectionListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element minOccurs="0" name="collectorName" type="xs:string"/>
+						<xs:element minOccurs="0" name="collectorCountry" type="xs:string"/>
+						<xs:element minOccurs="0" name="hasRelatedCards">
+						  <xs:simpleType>
+							<xs:restriction base="xs:string">
+							  <xs:pattern value="jah|ei"/>
+							</xs:restriction>
+						  </xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getCollectionListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="collection" type="tns:collectionType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="getCollectionCardListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="collectionId" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getCollectionCardListResponse" type="tns:collectionCardListType"/>
+			
+			<xs:element name="addCollectionCardRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="requestId" type="xs:integer"/>
+						<xs:element name="collectionId" type="xs:integer"/>
+						<xs:element name="cardId" type="xs:integer"/>
+						<xs:element name="quantity" type="xs:double"/>
+						<xs:element name="unitPrice" type="xs:double"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="addCollectionCardResponse" type="tns:collectionCardType"/>
+		
+		</xs:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="getCardMessageRequest">
+		<wsdl:part name="parameter" element="tns:getCardRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getCardMessageResponse">
+		<wsdl:part name="parameter" element="tns:getCardResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="addCardMessageRequest">
+		<wsdl:part name="parameter" element="tns:addCardRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addCardMessageResponse">
+		<wsdl:part name="parameter" element="tns:addCardResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getCardListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getCardListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getCardListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getCardListResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getCollectionMessageRequest">
+		<wsdl:part name="parameter" element="tns:getCollectionRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getCollectionMessageResponse">
+		<wsdl:part name="parameter" element="tns:getCollectionResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="addCollectionMessageRequest">
+		<wsdl:part name="parameter" element="tns:addCollectionRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addCollectionMessageResponse">
+		<wsdl:part name="parameter" element="tns:addCollectionResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getCollectionListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getCollectionListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getCollectionListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getCollectionListResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getCollectionCardListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getCollectionCardListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getCollectionCardListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getCollectionCardListResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="addCollectionCardMessageRequest">
+		<wsdl:part name="parameter" element="tns:addCollectionCardRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addCollectionCardMessageResponse">
+		<wsdl:part name="parameter" element="tns:addCollectionCardResponse"/>
+	</wsdl:message>
+	
+	<wsdl:portType name="CollectionPortType">
+	
+		<wsdl:operation name="getCard">
+			<wsdl:input message="tns:getCardMessageRequest"/>
+			<wsdl:output message="tns:getCardMessageResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="addCard">
+			<wsdl:input message="tns:addCardMessageRequest"/>
+			<wsdl:output message="tns:addCardMessageResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getCardList">
+			<wsdl:input message="tns:getCardListMessageRequest"/>
+			<wsdl:output message="tns:getCardListMessageResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getCollection">
+			<wsdl:input message="tns:getCollectionMessageRequest"/>
+			<wsdl:output message="tns:getCollectionMessageResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="addCollection">
+			<wsdl:input message="tns:addCollectionMessageRequest"/>
+			<wsdl:output message="tns:addCollectionMessageResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getCollectionList">
+			<wsdl:input message="tns:getCollectionListMessageRequest"/>
+			<wsdl:output message="tns:getCollectionListMessageResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getCollectionCardList">
+			<wsdl:input message="tns:getCollectionCardListMessageRequest"/>
+			<wsdl:output message="tns:getCollectionCardListMessageResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="addCollectionCard">
+			<wsdl:input message="tns:addCollectionCardMessageRequest"/>
+			<wsdl:output message="tns:addCollectionCardMessageResponse"/>
+		</wsdl:operation>
+		
+	</wsdl:portType>
+	
+	<wsdl:binding name="CollectionBinding" type="tns:CollectionPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		
+		<wsdl:operation name="getCard">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="addCard">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getCardList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getCollection">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="addCollection">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getCollectionList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getCollectionCardList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="addCollectionCard">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+	</wsdl:binding>
+	
+	<wsdl:service name="CollectionService">
+		<wsdl:port name="CollectionPort" binding="tns:CollectionBinding">
+			<soap:address location="http://alex-pc:8080/CollectionWebApplication/CollectionService"/>
+		</wsdl:port>
+	</wsdl:service>
+	
+</wsdl:definitions>
