@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="8d626a57-cf93-421f-94ab-df2ba1b9e397" activeEnvironment="Default" name="CollectionServiceSOAP" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Report Format(s)" value=""/>
+  <con:entry key="Host:Port" value=""/>
+  <con:entry key="Export JUnit Results" value="false"/>
+  <con:entry key="Export All" value="false"/>
+  <con:entry key="Save After" value="false"/>
+  <con:entry key="Add Settings" value="false"/>
+  <con:entry key="WSS Password Type" value=""/>
+  <con:entry key="TestSuite" value="Tests"/>
+  <con:entry key="Endpoint" value=""/>
+  <con:entry key="Select Report Type" value=""/>
+  <con:entry key="System Properties" value=""/>
+  <con:entry key="Password" value=""/>
+  <con:entry key="Print Report" value="false"/>
+  <con:entry key="Open Report" value="false"/>
+  <con:entry key="Export JUnit Results with test properties" value="false"/>
+  <con:entry key="Global Properties" value=""/>
+  <con:entry key="Project Properties" value=""/>
+  <con:entry key="Project Password" value=""/>
+  <con:entry key="TestCase" value="addCardTests"/>
+  <con:entry key="Username" value=""/>
+  <con:entry key="user-settings.xml Password" value=""/>
+  <con:entry key="TestRunner Path" value=""/>
+  <con:entry key="Environment" value="Default"/>
+  <con:entry key="Coverage Report" value="false"/>
+  <con:entry key="Enable UI" value="false"/>
+  <con:entry key="Root Folder" value=""/>
+  <con:entry key="Ignore Errors" value="false"/>
+  <con:entry key="Domain" value=""/>
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="Save Project" value="false"/>
+</xml-fragment>]]></con:setting></con:settings><con:interface xsi:type="con:WsdlInterface" id="2f4cbd81-f08c-4197-82a7-1afad63244c1" wsaVersion="NONE" name="CollectionBinding" type="wsdl" bindingName="{http://www.ttu.ee/idu0075/155409IAPB/ws/collection}CollectionBinding" soapVersion="1_1" anonymous="optional" definition="http://alex-pc:8080/CollectionWebApplication/CollectionService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://alex-pc:8080/CollectionWebApplication/CollectionService?wsdl"><con:part><con:url>http://alex-pc:8080/CollectionWebApplication/CollectionService?wsdl</con:url><con:content><![CDATA[<!--Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown.-->
+<wsdl:definitions targetNamespace="http://www.ttu.ee/idu0075/155409IAPB/ws/collection" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.ttu.ee/idu0075/155409IAPB/ws/collection" elementFormDefault="qualified">
+      <xs:complexType name="cardType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="condition" type="tns:conditionType"/>
+          <xs:element name="lang" type="tns:langType"/>
+          <xs:element name="artist" type="xs:string"/>
+          <xs:element name="year" type="xs:integer"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="conditionType">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="mint|near mint|played|heavily played"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="langType">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="en|fr|de|it|ja|ko|pt|ru|es|zh"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="collectionType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="collectionNo" type="xs:string"/>
+          <xs:element name="collectorName" type="xs:string"/>
+          <xs:element name="collectorCountry" type="xs:string"/>
+          <xs:element name="amount" type="xs:double"/>
+          <xs:element name="collectionCardList" type="tns:collectionCardListType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="collectionCardListType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="collectionCard" type="tns:collectionCardType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="collectionCardType">
+        <xs:sequence>
+          <xs:element name="card" type="tns:cardType"/>
+          <xs:element name="quantity" type="xs:double"/>
+          <xs:element name="unitPrice" type="xs:double"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getCardRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="cardId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCardResponse" type="tns:cardType"/>
+      <xs:element name="addCardRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="condition" type="tns:conditionType"/>
+            <xs:element name="lang" type="tns:langType"/>
+            <xs:element name="artist" type="xs:string"/>
+            <xs:element name="year" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addCardResponse" type="tns:cardType"/>
+      <xs:element name="getCardListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCardListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="card" type="tns:cardType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCollectionRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="collectionId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCollectionResponse" type="tns:collectionType"/>
+      <xs:element name="addCollectionRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="collectionNo" type="xs:string"/>
+            <xs:element name="collectorName" type="xs:string"/>
+            <xs:element name="collectorCountry" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addCollectionResponse" type="tns:collectionType"/>
+      <xs:element name="getCollectionListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element minOccurs="0" name="collectorName" type="xs:string"/>
+            <xs:element minOccurs="0" name="collectorCountry" type="xs:string"/>
+            <xs:element minOccurs="0" name="hasRelatedCards">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="jah|ei"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCollectionListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="collection" type="tns:collectionType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCollectionCardListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="collectionId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCollectionCardListResponse" type="tns:collectionCardListType"/>
+      <xs:element name="addCollectionCardRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="requestId" type="xs:integer"/>
+            <xs:element name="collectionId" type="xs:integer"/>
+            <xs:element name="cardId" type="xs:integer"/>
+            <xs:element name="quantity" type="xs:double"/>
+            <xs:element name="unitPrice" type="xs:double"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addCollectionCardResponse" type="tns:collectionCardType"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getCardMessageRequest">
+    <wsdl:part name="parameter" element="tns:getCardRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getCardMessageResponse">
+    <wsdl:part name="parameter" element="tns:getCardResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addCardMessageRequest">
+    <wsdl:part name="parameter" element="tns:addCardRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addCardMessageResponse">
+    <wsdl:part name="parameter" element="tns:addCardResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getCardListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getCardListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getCardListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getCardListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getCollectionMessageRequest">
+    <wsdl:part name="parameter" element="tns:getCollectionRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getCollectionMessageResponse">
+    <wsdl:part name="parameter" element="tns:getCollectionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addCollectionMessageRequest">
+    <wsdl:part name="parameter" element="tns:addCollectionRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addCollectionMessageResponse">
+    <wsdl:part name="parameter" element="tns:addCollectionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getCollectionListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getCollectionListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getCollectionListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getCollectionListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getCollectionCardListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getCollectionCardListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getCollectionCardListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getCollectionCardListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addCollectionCardMessageRequest">
+    <wsdl:part name="parameter" element="tns:addCollectionCardRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addCollectionCardMessageResponse">
+    <wsdl:part name="parameter" element="tns:addCollectionCardResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="CollectionPortType">
+    <wsdl:operation name="getCard">
+      <wsdl:input message="tns:getCardMessageRequest"/>
+      <wsdl:output message="tns:getCardMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addCard">
+      <wsdl:input message="tns:addCardMessageRequest"/>
+      <wsdl:output message="tns:addCardMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getCardList">
+      <wsdl:input message="tns:getCardListMessageRequest"/>
+      <wsdl:output message="tns:getCardListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getCollection">
+      <wsdl:input message="tns:getCollectionMessageRequest"/>
+      <wsdl:output message="tns:getCollectionMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addCollection">
+      <wsdl:input message="tns:addCollectionMessageRequest"/>
+      <wsdl:output message="tns:addCollectionMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getCollectionList">
+      <wsdl:input message="tns:getCollectionListMessageRequest"/>
+      <wsdl:output message="tns:getCollectionListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getCollectionCardList">
+      <wsdl:input message="tns:getCollectionCardListMessageRequest"/>
+      <wsdl:output message="tns:getCollectionCardListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addCollectionCard">
+      <wsdl:input message="tns:addCollectionCardMessageRequest"/>
+      <wsdl:output message="tns:addCollectionCardMessageResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CollectionBinding" type="tns:CollectionPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getCard">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCard">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCollection">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCollection">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCollectionList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCollectionCardList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCollectionCard">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CollectionService">
+    <wsdl:port name="CollectionPort" binding="tns:CollectionBinding">
+      <soap:address location="http://alex-pc:8080/CollectionWebApplication/CollectionService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint></con:endpoints><con:operation id="6e5f61b9-d514-482a-a55a-22037893ec17" isOneWay="false" action="" name="addCard" bindingOperationName="addCard" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="cb744605-9693-4593-babb-831dd923875f" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:addCardRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:name>Charge</col:name>\r
+         <col:condition>mint</col:condition>\r
+         <col:lang>en</col:lang>\r
+         <col:artist>Zezhou Chen</col:artist>\r
+         <col:year>2018</col:year>\r
+      </col:addCardRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/155409IAPB/ws/collection/CollectionPortType/addCardRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="e38275da-232b-4222-986e-ead2588d76b4" isOneWay="false" action="" name="addCollection" bindingOperationName="addCollection" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f3116eaa-5da2-4e7b-be7e-8f79a256ca61" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:addCollectionRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:collectionNo>coll_01</col:collectionNo>\r
+         <col:collectorName>Dave</col:collectorName>\r
+         <col:collectorCountry>USA</col:collectorCountry>\r
+      </col:addCollectionRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/155409IAPB/ws/collection/CollectionPortType/addCollectionRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="05ae723c-f71b-463f-8812-4b67a585cf38" isOneWay="false" action="" name="addCollectionCard" bindingOperationName="addCollectionCard" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="942be35e-a33d-42cc-94f9-f366b451e949" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:addCollectionCardRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:requestId>4945687</col:requestId>\r
+         <col:collectionId>1</col:collectionId>\r
+         <col:cardId>1</col:cardId>\r
+         <col:quantity>2</col:quantity>\r
+         <col:unitPrice>5</col:unitPrice>\r
+      </col:addCollectionCardRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/155409IAPB/ws/collection/CollectionPortType/addCollectionCardRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="60b4ba66-935d-4033-b9a2-037564818ae5" isOneWay="false" action="" name="getCard" bindingOperationName="getCard" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4f5a5b74-954a-43f1-9012-b8e0a9fd5d7f" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:getCardRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:cardId>1</col:cardId>\r
+      </col:getCardRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/155409IAPB/ws/collection/CollectionPortType/getCardRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="ea980ebf-6627-4068-a740-0c55927d2116" isOneWay="false" action="" name="getCardList" bindingOperationName="getCardList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a530ce0c-9a62-4fa9-87c2-f1c30e559bb3" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:getCardListRequest>\r
+         <col:token>salajane</col:token>\r
+      </col:getCardListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/155409IAPB/ws/collection/CollectionPortType/getCardListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="6806771a-3fd3-4cd2-b50c-6f4e8ed90bea" isOneWay="false" action="" name="getCollection" bindingOperationName="getCollection" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b2a8c0a2-7c93-4ba8-9b35-b507dad98208" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:getCollectionRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:collectionId>1</col:collectionId>\r
+      </col:getCollectionRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/155409IAPB/ws/collection/CollectionPortType/getCollectionRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="a496db42-2104-4e27-befc-a4958b190bd5" isOneWay="false" action="" name="getCollectionCardList" bindingOperationName="getCollectionCardList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5915464c-2852-4d51-a0bf-59fa41d1fb98" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:getCollectionCardListRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:collectionId>1</col:collectionId>\r
+      </col:getCollectionCardListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/155409IAPB/ws/collection/CollectionPortType/getCollectionCardListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="53a3ca36-e2c9-4641-b52b-2459e7f48b80" isOneWay="false" action="" name="getCollectionList" bindingOperationName="getCollectionList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6a2f9ae4-46b7-4bda-a542-4caa56bd3d35" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <col:getCollectionListRequest>
+         <col:token>salajane</col:token>
+         <col:collectorName>Dave</col:collectorName>
+         <col:collectorCountry>USA</col:collectorCountry>
+         <col:hasRelatedCards>jah</col:hasRelatedCards>
+      </col:getCollectionListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/155409IAPB/ws/collection/CollectionPortType/getCollectionListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="ca908851-796b-4804-915c-7d1c5472984f" name="Tests"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="74c36954-7c2d-4228-83f6-24f0b112aa86" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addCardTests" searchProperties="true"><con:settings/><con:testStep type="request" id="515f48ce-1bf8-470f-b8c9-d089007cd564" name="Schema Compliance"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>addCard</con:operation><con:request name="Schema Compliance" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="ed6f83d9-2126-4887-90e7-0710d90e79b5"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:addCardRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:name>Charge</col:name>\r
+         <col:condition>mint</col:condition>\r
+         <col:lang>en</col:lang>\r
+         <col:artist>Zezhou Chen</col:artist>\r
+         <col:year>2018</col:year>\r
+      </col:addCardRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="61c11d5d-0473-4488-9da3-5d6ed881c0aa" name="Schema Compliance"><con:configuration/></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/155409IAPB/ws/collection/CollectionPortType/addCardRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Expected Response" id="5e4d62cc-0e37-473c-8da8-62a9a50b822c"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>addCard</con:operation><con:request name="Expected Response" id="7f905d7e-3af2-469d-8590-ebdf15a8336c"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:addCardRequest>\r
+         <col:token>salajane</col:token>
+         <col:name>Charge</col:name>
+         <col:condition>mint</col:condition>
+         <col:lang>en</col:lang>
+         <col:artist>Zezhou Chen</col:artist>
+         <col:year>2018</col:year>
+      </col:addCardRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="c5c25937-7eba-4621-b1e6-fb52b9b00274" name="Contains expected id"><con:configuration><token>&lt;id>1&lt;/id></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="2909e8de-1c99-43be-b370-57f7399a1c41" name="Contains expected name"><con:configuration><token>&lt;name>Charge&lt;/name></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="36d3351c-3cfe-464a-bb58-7f62f2d155a3" name="Contains expected condition"><con:configuration><token>&lt;condition>mint&lt;/condition></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="3f3b8c0c-1b11-44e1-baf0-7c3a0a0c33a3" name="Contains expected lang"><con:configuration><token>&lt;lang>en&lt;/lang></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="f3f9a29c-07da-4a85-81ba-4d626a19a7cf" name="Contains expected artist"><con:configuration><token>&lt;artist>Zezhou Chen&lt;/artist></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="6e619db7-85ed-432a-9018-b3e9012fc47f" name="Contains expected year"><con:configuration><token>&lt;year>2018&lt;/year></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="5891d434-85e1-4b01-a037-34d4fe6fb82a" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addCollectionTests" searchProperties="true"><con:settings/><con:testStep type="request" id="57a03fbf-c87c-499b-a73f-56e95723586f" name="Schema Compliance"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>addCollection</con:operation><con:request name="Schema Compliance" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="30cb5da8-ef9d-49f7-9929-097c32d376c2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:addCollectionRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:collectionNo>coll_01</col:collectionNo>\r
+         <col:collectorName>Dave</col:collectorName>\r
+         <col:collectorCountry>USA</col:collectorCountry>\r
+      </col:addCollectionRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="583ca298-b3c1-4342-92aa-41941e58a956" name="Schema Compliance"><con:configuration/></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/155409IAPB/ws/collection/CollectionPortType/addCollectionRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Expected Response" id="ed455a5a-5758-4b8d-8d79-151393366bc6"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>addCollection</con:operation><con:request name="Expected Response" id="04eade90-b3d2-4590-aa25-dd8ab9a0709f"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:addCollectionRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:collectionNo>coll_01</col:collectionNo>\r
+         <col:collectorName>Dave</col:collectorName>\r
+         <col:collectorCountry>USA</col:collectorCountry>\r
+      </col:addCollectionRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="f3f5b121-7a81-460e-919c-51873f4adf22" name="Contains expected id"><con:configuration><token>&lt;id>1&lt;/id></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="50699fe2-7292-42f3-abf0-414f476f0db0" name="Contains expected collectionNo"><con:configuration><token>&lt;collectionNo>coll_01&lt;/collectionNo></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="ed491cb3-9c03-4c19-9245-ba4ccf21b750" name="Contains expected collectorName"><con:configuration><token>&lt;collectorName>Dave&lt;/collectorName></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="cc3d528d-209e-4d04-9445-bf03ef21139a" name="Contains expected collectorCountry"><con:configuration><token>&lt;collectorCountry>USA&lt;/collectorCountry></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="7b2558a4-65aa-41b9-9c86-ade2f3790b96" name="Contains expected amount"><con:configuration><token>&lt;amount>0.0&lt;/amount></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="2a1598cb-ec13-4d80-8ed7-8004c0ae0ac3" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addCollectionCardTests" searchProperties="true"><con:settings/><con:testStep type="request" name="Schema Compliance" id="ea7e2f26-3dd9-4d2a-a339-adbc71425c39"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>addCollectionCard</con:operation><con:request name="Schema Compliance" id="8df69ad5-5720-4ee5-8b66-160f27f226d3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:addCollectionCardRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:requestId>789456</col:requestId>\r
+         <col:collectionId>1</col:collectionId>\r
+         <col:cardId>1</col:cardId>\r
+         <col:quantity>3</col:quantity>\r
+         <col:unitPrice>1.45</col:unitPrice>\r
+      </col:addCollectionCardRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="e9390d35-e32d-4580-91c4-41355c86ef44"><con:configuration/></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Expected Response" id="71f4def4-11c6-41ec-8cc6-82470eb6dbb3"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>addCollectionCard</con:operation><con:request name="Expected Response" id="6deca7b3-975b-45bb-87c1-f29296de5251"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:addCollectionCardRequest>\r
+         <col:token>salajane</col:token>
+         <col:requestId>789456</col:requestId>
+         <col:collectionId>1</col:collectionId>
+         <col:cardId>1</col:cardId>
+         <col:quantity>3</col:quantity>
+         <col:unitPrice>1.45</col:unitPrice>
+      </col:addCollectionCardRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="72304604-638c-48c5-9d4b-68ce7eec0154" name="Contains expected id"><con:configuration><token>&lt;id>1&lt;/id></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="b0077746-c145-437b-9b7d-1110f46e6fa5" name="Contains expected name"><con:configuration><token>&lt;name>Charge&lt;/name></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="20f54699-4c55-467b-a588-822d71c7b8cf" name="Contains expected condition"><con:configuration><token>&lt;condition>mint&lt;/condition></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="12649d06-1739-412a-b113-0fc1cf5f5f95" name="Contains expected lang"><con:configuration><token>&lt;lang>en&lt;/lang></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="1b641419-77ac-4d51-bde1-e3356f5ac8a6" name="Contains expected artist"><con:configuration><token>&lt;artist>Zezhou Chen&lt;/artist></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="fefc7587-3111-46a4-92bd-2aa430404403" name="Contains expected year"><con:configuration><token>&lt;year>2018&lt;/year></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="184b3604-f855-4278-b633-fde00f773cf1" name="Contains expected quantity"><con:configuration><token>&lt;quantity>3.0&lt;/quantity></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="27101607-461f-49d2-8c6c-464c4d464b3f" name="Contains expected unitPrice"><con:configuration><token>&lt;unitPrice>1.45&lt;/unitPrice></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="20b6b343-c114-4d41-a1a3-7e0a21a777d4" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getCardTests" searchProperties="true"><con:settings/><con:testStep type="request" name="Schema Compliance" id="eac3c17a-a06a-4fe7-a92b-db4deee8906f"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>getCard</con:operation><con:request name="Schema Compliance" id="f1fa7010-017c-4e74-bfad-b782f57c044e"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:getCardRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:cardId>1</col:cardId>\r
+      </col:getCardRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="e75ba091-43a7-4ff8-a4cb-710384057ea5"><con:configuration/></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Expected Response" id="b03506ff-6d89-4d08-a278-68474d4892a4"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>getCard</con:operation><con:request name="Expected Response" id="6fccfd79-c49e-4e4d-a63a-d9e8b796d45b"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:getCardRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:cardId>1</col:cardId>\r
+      </col:getCardRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>
+]]></con:request><con:assertion type="Simple Contains" id="69dc343f-91f3-49fe-9074-0d05dc0f59db" name="Contains expected id"><con:configuration><token>&lt;id>1&lt;/id></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="d076fd4f-92b0-473a-a99a-fe7e73a8f879" name="Contains expected name"><con:configuration><token>&lt;name>Charge&lt;/name></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="b77d8772-799b-4869-9415-678c3c9e19c0" name="Contains expected condition"><con:configuration><token>&lt;condition>mint&lt;/condition></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="eaed35d4-53bd-44b8-b1c0-2a0dfb0bd7f9" name="Contains expected lang"><con:configuration><token>&lt;lang>en&lt;/lang></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="4ebdb939-cde7-49a6-bbb0-5213c4845099" name="Contains expected artist"><con:configuration><token>&lt;artist>Zezhou Chen&lt;/artist></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="e926cc5e-c419-42ee-977a-ad0573671b11" name="Contains expected year"><con:configuration><token>&lt;year>2018&lt;/year></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="d242af42-115b-41f4-913c-0b19daec5c90" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getCardListTests" searchProperties="true"><con:settings/><con:testStep type="request" name="Schema Compliance" id="7e443fc1-ac0f-4fb3-9bfd-13c944bd96fc"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>getCardList</con:operation><con:request name="Schema Compliance" id="538c7400-5ec7-454a-862d-2829e0b63482"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:getCardListRequest>\r
+         <col:token>salajane</col:token>\r
+      </col:getCardListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="b66b79d3-1c61-41a1-bd81-7ab8aabfb8da"><con:configuration/></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Expected Response" id="f92f75da-4aa6-48bf-8a33-fd0916d41210"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>getCardList</con:operation><con:request name="Expected Response" id="00d2bcea-22e1-41ab-a243-c0055c8f5193"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:getCardListRequest>\r
+         <col:token>salajane</col:token>\r
+      </col:getCardListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="XPath Match" id="ea2245ab-72c5-4eb3-8eb4-09a6cc547b33" name="XPath Match - 1 card in list"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/155409IAPB/ws/collection';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+
+count(//ns1:getCardListResponse/ns1:card)</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Simple Contains" id="48bd9fd2-0eaf-43f5-85b5-46520b76c47d" name="Contains expected id"><con:configuration><token>&lt;id>1&lt;/id></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="47db8468-71ed-4dce-8bdb-7a27886d5eab" name="Contains expected name"><con:configuration><token>&lt;name>Charge&lt;/name></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="6eb6ef33-25d1-4211-ba21-3a3445cbf254" name="Contains expected condition"><con:configuration><token>&lt;condition>mint&lt;/condition></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="23ff4118-3ed2-4a34-8aeb-d34624d7f417" name="Contains expected lang"><con:configuration><token>&lt;lang>en&lt;/lang></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="de19aca7-0f57-4750-94b0-87c76d4bbe82" name="Contains expected artist"><con:configuration><token>&lt;artist>Zezhou Chen&lt;/artist></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="9771678b-9639-4408-b9a7-35d9c845472c" name="Contains expected year"><con:configuration><token>&lt;year>2018&lt;/year></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="44788b90-dda9-491b-aec3-9b7660979447" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getCollectionTests" searchProperties="true"><con:settings/><con:testStep type="request" name="Schema Compliance" id="c9370da6-3e5b-4ac1-a41d-2b07a3efaaf4"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>getCollection</con:operation><con:request name="Schema Compliance" id="ffaec1c3-73b0-46a5-b6f1-b79f2e1f6e3c"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:getCollectionRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:collectionId>1</col:collectionId>\r
+      </col:getCollectionRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="e7fecfc4-dd54-4955-a61a-81790c800176"><con:configuration/></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Expected Response" id="35f25937-a46f-44af-a723-c7000243c199"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>getCollection</con:operation><con:request name="Expected Response" id="545f4ccc-73a5-42a6-b89c-734bc813a057"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:getCollectionRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:collectionId>1</col:collectionId>\r
+      </col:getCollectionRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="XPath Match" id="0502d912-1f3b-46c3-bd2c-c2264d8d9d91" name="XPath Match - expected collection id"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/155409IAPB/ws/collection';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+
+//ns1:getCollectionResponse/ns1:id</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Simple Contains" id="ab85877d-c9c6-453a-9058-1e53e3c4b1e9" name="Contains expected collectionNo"><con:configuration><token>&lt;collectionNo>coll_01&lt;/collectionNo></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="b5b8b0d5-71f9-4bc8-a89b-0406b6a27c8c" name="Contains expected collectorName"><con:configuration><token>&lt;collectorName>Dave&lt;/collectorName></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="7c4c64a4-f7ef-4730-acec-0e7785e83021" name="Contains expected collectorCountry"><con:configuration><token>&lt;collectorCountry>USA&lt;/collectorCountry></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="09448447-d391-407a-b5b4-b67aa4002f90" name="Contains expected amount"><con:configuration><token>&lt;amount>4.35&lt;/amount></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="XPath Match" id="f1aa2523-13f1-4fc4-95e1-35d4e55244bc" name="XPath Match - 1 card in list"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/155409IAPB/ws/collection';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+
+count(//ns1:collectionCardList/ns1:collectionCard)</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="be4d1de7-3d02-4f87-a61a-9714c9412f4d" name="XPath Match - expected card id"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/155409IAPB/ws/collection';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+
+//ns1:card/ns1:id</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Simple Contains" id="ae94cf68-b5b0-4ef0-8df1-203cb138e7b5" name="Contains expected name"><con:configuration><token>&lt;name>Charge&lt;/name></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="82379129-a6b4-49dd-855f-81f4fe11a271" name="Contains expected condition"><con:configuration><token>&lt;condition>mint&lt;/condition></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="b8697317-5eb5-473e-9136-c7f18f55a9a8" name="Contains expected lang"><con:configuration><token>&lt;lang>en&lt;/lang></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="cdb96e32-ef1c-4b00-9112-96c8a22553df" name="Contains expected artist"><con:configuration><token>&lt;artist>Zezhou Chen&lt;/artist></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="c7dd5169-65d4-4acc-83cb-35fe4d6fca95" name="Contains expected year"><con:configuration><token>&lt;year>2018&lt;/year></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="193232eb-fb03-43da-b149-af447f88d36f" name="Contains expected quantity"><con:configuration><token>&lt;quantity>3.0&lt;/quantity></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="8ca5ceaa-23d6-439f-ad1e-ae4f0bee6c65" name="Contains expected unitPrice"><con:configuration><token>&lt;unitPrice>1.45&lt;/unitPrice></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="0d0e472f-af05-4539-92c4-e2f0315cfbe5" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getCollectionCardListTests" searchProperties="true"><con:settings/><con:testStep type="request" name="Schema Compliance" id="7ae47b17-3059-4321-a287-0647608f3a5b"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>getCollectionCardList</con:operation><con:request name="Schema Compliance" id="3a8485fd-12b6-48d2-ac1c-a2b39575b2df"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:getCollectionCardListRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:collectionId>1</col:collectionId>\r
+      </col:getCollectionCardListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="3d28da81-2ff3-4626-a097-e21b90e1a3d0"><con:configuration/></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Expected Response" id="877a0575-935a-4f09-891d-92582ed463e1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>getCollectionCardList</con:operation><con:request name="Expected Response" id="839c577d-c2a0-4340-9963-5d5160133203"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:getCollectionCardListRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:collectionId>1</col:collectionId>\r
+      </col:getCollectionCardListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="XPath Match" id="d4f68778-5708-46e5-b452-2a11de149fb5" name="XPath Match - 1 card in list"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/155409IAPB/ws/collection';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+
+count(//ns1:getCollectionCardListResponse/ns1:collectionCard)</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Simple Contains" id="a8f3378b-27e0-4140-9c4f-3eab1113f3d7" name="Contains expected id"><con:configuration><token>&lt;id>1&lt;/id></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="789d3788-c84a-4c2b-8908-91edf349ccfc" name="Contains expected name"><con:configuration><token>&lt;name>Charge&lt;/name></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="3edc418a-9b9c-4499-a486-4845f41c1c19" name="Contains expected condition"><con:configuration><token>&lt;condition>mint&lt;/condition></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="115834c9-e9f8-44a1-8ba2-cb8a56582262" name="Contains expected lang"><con:configuration><token>&lt;lang>en&lt;/lang></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="da285b9a-2d14-4bbb-a27e-6a553d081b11" name="Contains expected artist"><con:configuration><token>&lt;artist>Zezhou Chen&lt;/artist></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="42fc6d66-c521-404d-9bf5-7c4f55332e1e" name="Contains expected year"><con:configuration><token>&lt;year>2018&lt;/year></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="cd73dc05-ab39-4fd4-81d5-6acbd725241d" name="Contains expected quantity"><con:configuration><token>&lt;quantity>3.0&lt;/quantity></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="6ff0574f-05ee-4d95-838d-6b90751d4160" name="Contains expected unitPrice"><con:configuration><token>&lt;unitPrice>1.45&lt;/unitPrice></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="28e03a72-c95a-4eda-acc1-b09fb929cb81" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getCollectionListTests" searchProperties="true"><con:settings/><con:testStep type="request" name="Schema Compliance" id="ccea7c47-8079-4c62-ba0e-faeaaa447888"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>getCollectionList</con:operation><con:request name="Schema Compliance" id="140e9318-e298-4abc-bdb7-329faf7b1f35"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:getCollectionListRequest>\r
+         <col:token>salajane</col:token>\r
+      </col:getCollectionListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="5db4a3ba-394d-43af-a4fa-0c9726e7a0c8"><con:configuration/></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Expected Response" id="b72b836a-cb7d-4d18-9657-e58192bbb726"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CollectionBinding</con:interface><con:operation>getCollectionList</con:operation><con:request name="Expected Response" id="986bd232-a06b-4e17-bf38-39f6ec7d2926"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://alex-pc:8080/CollectionWebApplication/CollectionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:col="http://www.ttu.ee/idu0075/155409IAPB/ws/collection">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <col:getCollectionListRequest>\r
+         <col:token>salajane</col:token>\r
+         <col:collectorName>Dave</col:collectorName>
+         <col:collectorCountry>USA</col:collectorCountry>
+         <col:hasRelatedCards>jah</col:hasRelatedCards>
+      </col:getCollectionListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="XPath Match" id="674e2bf1-f831-434b-9594-fe871e13a8e0" name="XPath Match - 1 collection in list"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/155409IAPB/ws/collection';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+
+count(//ns1:getCollectionListResponse/ns1:collection)</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="4516effe-1e3d-4259-b41d-3bdf7d020bc1" name="XPath Match - expected collection id"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/155409IAPB/ws/collection';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+
+//ns1:collection/ns1:id</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Simple Contains" id="a82a037f-e6fc-4ca3-ae2b-ea36b1d3e76a" name="Contains expected collectionNo"><con:configuration><token>&lt;collectionNo>coll_01&lt;/collectionNo></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="49d7e8a4-b90b-4d6f-add0-6bb1e6454770" name="Contains expected collectorName"><con:configuration><token>&lt;collectorName>Dave&lt;/collectorName></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="7f74eb50-2a49-47b3-b60b-9eac83bd2428" name="Contains expected collectorCountry"><con:configuration><token>&lt;collectorCountry>USA&lt;/collectorCountry></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="7b6b038b-331e-4977-b468-1b4d5bbcbff5" name="Contains expected amount"><con:configuration><token>&lt;amount>4.35&lt;/amount></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="XPath Match" id="aa0afc0f-ecc5-45a2-bcb8-ae5326969b17" name="XPath Match - expected card id"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/155409IAPB/ws/collection';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+
+//ns1:card/ns1:id</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Simple Contains" id="3c6a40bd-3d1d-4f20-a81d-74d0f430a704" name="Contains expected name"><con:configuration><token>&lt;name>Charge&lt;/name></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="62c9b5b4-b9f6-4d85-93a0-c51bb59bb240" name="Contains expected condition"><con:configuration><token>&lt;condition>mint&lt;/condition></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="cdf37fee-0ab2-4b6d-a719-d6a23a3027a4" name="Contains expected lang"><con:configuration><token>&lt;lang>en&lt;/lang></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="eeea5d66-9720-4131-80ea-0d9c1479f12b" name="Contains expected artist"><con:configuration><token>&lt;artist>Zezhou Chen&lt;/artist></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="063348e6-d6fa-4888-9dd1-b0836235c162" name="Contains expected year"><con:configuration><token>&lt;year>2018&lt;/year></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="8efe1160-7fe0-442a-a770-1ab0c9787588" name="Contains expected quantity"><con:configuration><token>&lt;quantity>3.0&lt;/quantity></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="a4bff850-0399-478b-b581-4854ac40cf33" name="Contains expected unitPrice"><con:configuration><token>&lt;unitPrice>1.45&lt;/unitPrice></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
